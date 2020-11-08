@@ -8,8 +8,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://pbs.twimg.com/profile_images/2808166568/48ff73117fd4810315e0c978d50452ce_400x400.jpeg">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://ibb.co/sC0TMQV">
+    <img src="https://ibb.co/sC0TMQV" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">FyndMyMovie</h3>
@@ -47,9 +47,11 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://ibb.co/nz9Nz2n)
+[![Product Name Screen Shot][testing-screenshot]](https://ibb.co/TqMXL4F)
 
-There are many great Movie CRUD APIs available on GitHub, however, I didn't copy from them, I created FynMyMovie which made me understand a new framework AIOHTTP. 
+
+There are many great Movie CRUD APIs available on GitHub, however, I didn't copy from them, I created FyndMyMovie which made me understand a new framework AIOHTTP. 
 
 Here's why you should love this assignment:
 * I am fluent in Django, Flask and python-cli applications, learning Aiohttp added a new feather to my cap of Python frameworks.
@@ -153,5 +155,5 @@ Project Link: [https://github.com/LondheShubham153/fynd-my-movie](https://github
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+[linkedin-url]: https://www.linkedin.com/in/shubhamlondhe1996/
+[product-screenshot]: https://ibb.co/nz9Nz2n
