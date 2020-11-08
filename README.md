@@ -47,8 +47,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://ibb.co/nz9Nz2n)
-[![Product Name Screen Shot][testing-screenshot]](https://ibb.co/TqMXL4F)
+![product-screenshot](https://ibb.co/nz9Nz2n)
+![testing-screenshot](https://ibb.co/TqMXL4F)
 
 
 There are many great Movie CRUD APIs available on GitHub, however, I didn't copy from them, I created FyndMyMovie which made me understand a new framework AIOHTTP. 
