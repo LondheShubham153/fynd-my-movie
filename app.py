@@ -5,6 +5,8 @@ import aiosqlite
 import json
 from aiohttp_tokenauth import token_auth_middleware
 import os
+from aiohttp_swagger import *
+
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(levelname)s -%(message)s', 
                     datefmt='%d-%b-%y %H:%M')
@@ -14,6 +16,19 @@ routes = web.RouteTableDef()
 # This is the API end point for App to give health check status
 @routes.get('/')
 async def healthcheck_handler(re):
+    """
+    ---
+    description: This end-point allow to test that service is up.
+    tags:
+    - Health check
+    produces:
+    - text/plain
+    responses:
+        "200":
+            description: successful operation. Return "pong" text
+        "405":
+            description: invalid HTTP Method
+    """
     return web.json_response({'status': 'up'}, status=200)
 
 # This is the API end point for App to get data
@@ -144,7 +159,8 @@ def init_app(argv=None):
                                 ])
     app.add_routes(routes)
     app.cleanup_ctx.append(init_db)
-    web.run_app(app,port=os.environ['PORT'])
+    setup_swagger(app)
+    web.run_app(app,port=8082)#os.environ['PORT'])
     return app
 
 movie.try_make_db()
