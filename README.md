@@ -1,5 +1,4 @@
 
-[![Contributors][contributors-shield]][contributors-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
@@ -9,7 +8,7 @@
 <br />
 <p align="center">
   <a href="https://ibb.co/sC0TMQV">
-    <img src="https://ibb.co/sC0TMQV" alt="Logo" width="80" height="80">
+    <img src="images/logo.jpeg" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">FyndMyMovie</h3>
@@ -47,8 +46,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![product-screenshot](https://ibb.co/nz9Nz2n)
-![testing-screenshot](https://ibb.co/TqMXL4F)
+![product-screenshot](images/search.png)
+![testing-screenshot](images/test.png)
 
 
 There are many great Movie CRUD APIs available on GitHub, however, I didn't copy from them, I created FyndMyMovie which made me understand a new framework AIOHTTP. 
@@ -141,7 +140,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 
 Shubham Londhe - [@shubhamlondhe96](https://instagram.com/shubhamlondhe96) - My Instagram
-
+Shubham Londhe - [shubhamlondhe1996](https://www.linkedin.com/in/shubhamlondhe1996/) - My LinkedIn
 Project Link: [https://github.com/LondheShubham153/fynd-my-movie](https://github.com/LondheShubham153/fynd-my-movie)
 
 
@@ -150,10 +149,9 @@ Project Link: [https://github.com/LondheShubham153/fynd-my-movie](https://github
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
+
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/shubhamlondhe1996/
-[product-screenshot]: https://ibb.co/nz9Nz2n
+[product-screenshot]: images/search.png
