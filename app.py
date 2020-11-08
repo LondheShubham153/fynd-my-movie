@@ -4,7 +4,7 @@ import logging
 import aiosqlite
 import json
 from aiohttp_tokenauth import token_auth_middleware
-
+import os
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(levelname)s -%(message)s', 
                     datefmt='%d-%b-%y %H:%M')
@@ -144,7 +144,7 @@ def init_app(argv=None):
                                 ])
     app.add_routes(routes)
     app.cleanup_ctx.append(init_db)
-    web.run_app(app)
+    web.run_app(app,port=os.environ['PORT'])
     return app
 
 movie.try_make_db()
