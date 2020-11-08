@@ -5,7 +5,6 @@ import aiosqlite
 import json
 from aiohttp_tokenauth import token_auth_middleware
 import os
-from aiohttp_swagger import *
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(levelname)s -%(message)s', 
@@ -25,7 +24,7 @@ async def healthcheck_handler(re):
     - text/plain
     responses:
         "200":
-            description: successful operation. Return "pong" text
+            description: successful operation. Return "up" text
         "405":
             description: invalid HTTP Method
     """
@@ -34,6 +33,20 @@ async def healthcheck_handler(re):
 # This is the API end point for App to get data
 @routes.get('/movies')
 async def get_handler(request):
+    """
+    ---
+    description: This end-point allow to get all the movies from the db.
+    You can even pass search in query params to search your favourite movie
+    tags:
+    - Get all movies
+    produces:
+    - text/plain
+    responses:
+        "200":
+            description: successful operation. Return movies
+        "405":
+            description: invalid HTTP Method
+    """
     result = []
     query = request.rel_url.query.get('search',None)
     db = request.config_dict["DB"]
@@ -56,6 +69,19 @@ async def get_handler(request):
 # This is the API end point for App to upload data
 @routes.post('/movies')
 async def post_handler(request):
+    """
+    ---
+    description: This end-point allow to Add a movie int the db, you need admin access to use the API.
+    tags:
+    - Add moviek
+    produces:
+    - text/plain
+    responses:
+        "200":
+            description: successful operation. Return 'Uploaded movie' text
+        "405":
+            description: invalid HTTP Method
+    """
     try:
         payload = await request.json()
         keys = ['99popularity', 'director', 'genre', 'imdb_score', 'name']
@@ -78,6 +104,19 @@ async def post_handler(request):
 # This is the API end point for App to get data
 @routes.get('/movies/{id}')
 async def get_by_id_handler(request):
+    """
+    ---
+    description: This end-point allow to get any movie by movie's id.
+    tags:
+    - Get movie by id
+    produces:
+    - text/plain
+    responses:
+        "200":
+            description: successful operation. Returns movie object for given movie id
+        "405":
+            description: invalid HTTP Method
+    """
     ret = []
     db = request.config_dict["DB"]
     movie_id = str(request.match_info["id"])
@@ -100,6 +139,19 @@ async def get_by_id_handler(request):
 # This is the API end point for App to edit data
 @routes.put('/movies/{id}')
 async def put_handler(request):
+    """
+    ---
+    description: This end-point allow to update a given movie by it's id.
+    tags:
+    - Edit movie
+    produces:
+    - text/plain
+    responses:
+        "200":
+            description: successful operation. Return "Updated movie" text
+        "405":
+            description: invalid HTTP Method
+    """
     try:
         movie_id = request.match_info["id"]
         payload = await request.json()
@@ -119,7 +171,7 @@ async def put_handler(request):
         await db.commit()
         response_obj = {'message': 'success',
                         'movie_id': movie_id,
-                        'detail': 'message: Uploaded movie data to the DB'}
+                        'detail': 'message: Updated movie data to the DB'}
         return web.json_response(response_obj, status=200)
     except Exception as e:
         response_obj = {'status': 'error', 'message': str(e)}
@@ -128,6 +180,19 @@ async def put_handler(request):
 # This is the API end point for App to delete data
 @routes.delete('/movies/{id}')
 async def delete_handler(request):
+    """
+    ---
+    description: This end-point allows to delete movie from the db by given id.
+    tags:
+    - Delete movie
+    produces:
+    - text/plain
+    responses:
+        "200":
+            description: successful operation. Returns "ok" text
+        "405":
+            description: invalid HTTP Method
+    """
     try:
         movie_id = request.match_info["id"]
         db = request.config_dict["DB"]
@@ -146,6 +211,14 @@ async def delete_handler(request):
         return web.json_response(response_obj, status=500)
 
 async def init_db(app: web.Application):
+    """
+    ---
+    description: This method allows to initialize the sqlite database.
+    tags:
+    - initialize database
+    produces:
+    - database connection object
+    """
     sqlite_db = movie.get_db_path()
     db = await aiosqlite.connect(sqlite_db)
     db.row_factory = aiosqlite.Row
@@ -159,8 +232,7 @@ def init_app(argv=None):
                                 ])
     app.add_routes(routes)
     app.cleanup_ctx.append(init_db)
-    setup_swagger(app)
-    web.run_app(app,port=8082)#os.environ['PORT'])
+    web.run_app(app,port=os.environ['PORT'])
     return app
 
 movie.try_make_db()
