@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.DEBUG,
 routes = web.RouteTableDef()
 
 # This is the API end point for App to give health check status
-@routes.get('/')
+@routes.get('/get')
 async def healthcheck_handler(re):
     """
     ---
