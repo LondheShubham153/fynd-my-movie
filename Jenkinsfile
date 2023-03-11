@@ -7,8 +7,9 @@ pipeline {
     agent { label 'ZorinOS' }
 
     environment {
-        PYTHON_VERSION = '3'
-        registryCredential = 'Dockerhub_creads'
+        PYTHON_VERSION = "3"
+        registryCredential = "Dockerhub_creads"
+        registry = "docker.io"
         appRegistry = "docker.io/dineshtamang14/movies-api"
     }
 
@@ -30,7 +31,7 @@ pipeline {
         stage('Push Docker image to Docker Hub') {
             steps {
                 script {
-                    docker.withRegistry(vprofileRegistry, registryCredential){
+                    docker.withRegistry(registry, registryCredential){
                         dockerImage.push("$BUILD_NUMBER")
                         dockerImage.push('latest')
                     }
