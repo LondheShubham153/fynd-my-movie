@@ -41,11 +41,7 @@ pipeline {
 
         stage('Deploy Docker container to remote server') {
             steps {
-                script {
-                    sshCommand remote: '$remote-server', user: '$username', password: '$password', command: """
-                        docker run -d -p 8000:8000 --name movies-api dineshtamang14/movies-api:$BUILD_NUMBER
-                    """
-                }
+                sh "docker run -itd -p 8000:8000 --name movies-api dineshtamang14/movies-api:$BUILD_NUMBER"
             }
         }
     }
