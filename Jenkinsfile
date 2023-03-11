@@ -1,5 +1,5 @@
 pipeline {
-    agent ZorinOS
+    agent { label 'ZorinOS' }
 
     environment {
         PYTHON_VERSION = '3.8.10'
