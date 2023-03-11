@@ -1,8 +1,10 @@
-FROM python:3.9.5-buster
+FROM python:3.9.9-alpine
 WORKDIR /usr/app
 COPY requirements.txt .
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN apk add --no-cache --virtual .build-deps gcc musl-dev \
+    && pip install --no-cache-dir -r requirements.txt \
+    && apk del .build-deps gcc musl-dev
 COPY . .
 ENV PORT=8000
 EXPOSE $PORT
-CMD ["python3", "app.py"]
+CMD ["python", "app.py"]
