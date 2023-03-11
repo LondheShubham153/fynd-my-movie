@@ -41,7 +41,7 @@ pipeline {
 
         stage('Deploy Docker container to remote server') {
             steps {
-                sh "docker run -itd -p 8000:8000 --name movies-api dineshtamang14/movies-api:$BUILD_NUMBER"
+                sh "docker run -itd -p 9000:8000 dineshtamang14/movies-api:$BUILD_NUMBER"
             }
         }
     }
