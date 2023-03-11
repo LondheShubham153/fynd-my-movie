@@ -60,7 +60,4 @@ pipeline {
             }
         }
     }
-    when {
-       expression { branch == 'main' }
-    }
 }
