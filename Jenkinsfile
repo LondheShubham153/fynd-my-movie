@@ -14,7 +14,7 @@ pipeline {
         }
 
         stage("Unit Testing"){
-            stpes {
+            steps {
                 sh "source env/bin/activate && pytest"
             }
         }
