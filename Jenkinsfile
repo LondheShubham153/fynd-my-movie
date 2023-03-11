@@ -2,7 +2,7 @@ pipeline {
     agent { label 'ZorinOS' }
 
     environment {
-        PYTHON_VERSION = '3.8.10'
+        PYTHON_VERSION = '3'
     }
 
     stages {
