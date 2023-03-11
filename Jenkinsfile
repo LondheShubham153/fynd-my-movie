@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         PYTHON_VERSION = '3'
-        registryCredential = 'DockerHub-creads'
+        registryCredential = 'Dockerhub_creads'
         appRegistry = "docker.io/dineshtamang14/movies-api"
     }
 
@@ -54,7 +54,7 @@ pipeline {
     post {
         always {
             echo 'Slack Notifications.'
-            slackSend channel: '#jenkinscicd',
+            slackSend channel: '#cicd-jenkins',
                 color: COLOR_MAP[currentBuild.currentResult],
                 message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         }
