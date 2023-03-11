@@ -21,8 +21,32 @@ pipeline {
         
         stage("Build"){
             steps {
-                sh "docker build -t dineshtamang14/movies-api:$BUILD_NUMBER"
-                sh "docker tag dineshtamang14/movies-api:$BUILD_NUMBER dineshtamang14/movies-api:latest"
+                script {
+                    def dockerImage = docker.build('dineshtamang14/movies-api:$BUILD_NUMBER')
+                    def dockerImageLatest = docker.image('dineshtamang14/movies-api:$BUILD_NUMBER')
+                    dockerImageLatest.tag("dineshtamang14/movies-api:latest")
+                }
+            }
+        }
+        
+        stage('Authenticate with Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                    script {
+                        docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials') {
+                        }
+                    }
+                }
+            }
+        }
+        stage('Push Docker image to Docker Hub') {
+            steps {
+                script {
+                    def dockerImage = docker.load("dineshtamang14/movies-api:$BUILD_NUMBER")
+                    dockerImage.push()
+                    def dockerImageLatest = docker.load("dineshtamang14/movies-api:latest")
+                    dockerImageLatest.push()
+                }
             }
         }
 
