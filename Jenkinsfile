@@ -8,14 +8,13 @@ pipeline {
     stages {
         stage("Installing dependencies"){
             steps {
-                sh "python${PYTHON_VERSION} -m venv env"
-                sh "source env/bin/activate && pip3 install -r requirements.txt"
+                sh "pip3 install -r requirements.txt"
             }
         }
 
         stage("Unit Testing"){
             steps {
-                sh "source env/bin/activate && pytest"
+                sh "pytest"
             }
         }
         
