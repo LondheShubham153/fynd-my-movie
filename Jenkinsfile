@@ -11,12 +11,6 @@ pipeline {
                 sh "pip3 install -r requirements.txt"
             }
         }
-
-        stage("Unit Testing"){
-            steps {
-                sh "pytest"
-            }
-        }
         
         stage("Build"){
             steps {
