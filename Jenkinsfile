@@ -1,8 +1,15 @@
+def COLOR_MAP = [
+    'SUCCESS': 'good', 
+    'FAILURE': 'danger',
+]
+
 pipeline {
     agent { label 'ZorinOS' }
 
     environment {
         PYTHON_VERSION = '3'
+        registryCredential = 'DockerHub-creads'
+        appRegistry = "docker.io/dineshtamang14/movies-api"
     }
 
     stages {
@@ -15,30 +22,20 @@ pipeline {
         stage("Build"){
             steps {
                 script {
-                    def dockerImage = docker.build('dineshtamang14/movies-api:$BUILD_NUMBER')
-                    def dockerImageLatest = docker.image('dineshtamang14/movies-api:$BUILD_NUMBER')
-                    dockerImageLatest.tag("dineshtamang14/movies-api:latest")
+                    def dockerImage = docker.build(appRegistry + ":$BUILD_NUMBER", ".")
+                    def dockerImageLatest = docker.image(appRegistry + ":$BUILD_NUMBER")
+                    dockerImageLatest.tag(appRegistry + ":latest")
                 }
             }
         }
         
-        stage('Authenticate with Docker Hub') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-                    script {
-                        docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials') {
-                        }
-                    }
-                }
-            }
-        }
         stage('Push Docker image to Docker Hub') {
             steps {
                 script {
-                    def dockerImage = docker.load("dineshtamang14/movies-api:$BUILD_NUMBER")
-                    dockerImage.push()
-                    def dockerImageLatest = docker.load("dineshtamang14/movies-api:latest")
-                    dockerImageLatest.push()
+                    docker.withRegistry(vprofileRegistry, registryCredential){
+                        dockerImage.push("$BUILD_NUMBER")
+                        dockerImage.push('latest')
+                    }
                 }
             }
         }
@@ -51,6 +48,15 @@ pipeline {
                     """
                 }
             }
+        }
+    }
+
+    post {
+        always {
+            echo 'Slack Notifications.'
+            slackSend channel: '#jenkinscicd',
+                color: COLOR_MAP[currentBuild.currentResult],
+                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         }
     }
 }
