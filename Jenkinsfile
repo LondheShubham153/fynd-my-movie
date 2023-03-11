@@ -24,7 +24,7 @@ pipeline {
                 script {
                     def dockerImage = docker.build(appRegistry + ":$BUILD_NUMBER", ".")
                     def dockerImageLatest = docker.image(appRegistry + ":$BUILD_NUMBER")
-                    dockerImageLatest.tag(appRegistry + ":latest")
+                    dockerImageLatest.tag(":latest")
                 }
             }
         }
