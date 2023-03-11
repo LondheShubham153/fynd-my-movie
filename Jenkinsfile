@@ -9,8 +9,8 @@ pipeline {
     environment {
         PYTHON_VERSION = "3"
         registryCredential = "Dockerhub_creads"
-        registry = "docker.io"
-        appRegistry = "docker.io/dineshtamang14/movies-api"
+        registry = "https://index.docker.io/v1/"
+        appRegistry = "dineshtamang14/movies-api"
     }
 
     stages {
