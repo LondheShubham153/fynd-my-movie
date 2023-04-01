@@ -11,6 +11,8 @@ pipeline {
         registryCredential = "Dockerhub_creads"
         registry = "https://index.docker.io/v1/"
         appRegistry = "dineshtamang14/movies-api"
+        SONARSERVER = 'sonarserver'
+        SONARSCANNER = 'sonarscanner'
     }
 
     stages {
@@ -20,6 +22,27 @@ pipeline {
             }
         }
         
+        stage('SonarQube Analysis') {
+            environment {
+                scannerHome = tool "${SONARSCANNER}"
+            }
+            steps {
+               withSonarQubeEnv("${SONARSERVER}") {
+		sh "${scannerHome}/bin/sonar-scanner"
+              }
+            }
+        }
+        
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
         stage("Build"){
             steps {
                 script {
