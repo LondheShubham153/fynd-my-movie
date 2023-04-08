@@ -100,6 +100,12 @@ pytest
 python app.py
 ```
 
+6. Run the Dockerized application 
+```docker
+docker build -t <IMAGE_NAME> .
+docker run -d -p HOST_PORT:CONTAINER_PORT <IMAGE_NAME>
+```
+
 
 
 <!-- USAGE EXAMPLES -->
@@ -155,3 +161,7 @@ Project Link: [https://github.com/LondheShubham153/fynd-my-movie](https://github
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/shubhamlondhe1996/
 [product-screenshot]: images/search.png
+
+
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/110477025/230706710-75f210cd-817d-48f8-b8b9-09d62a37bae2.png">
+
