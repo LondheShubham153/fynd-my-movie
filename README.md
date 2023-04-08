@@ -100,6 +100,12 @@ pytest
 python app.py
 ```
 
+6. Run the Dockerized application 
+```docker
+docker build -t <IMAGE_NAME> .
+docker run -d -p HOST_PORT:CONTAINER_PORT <IMAGE_NAME>
+```
+
 
 
 <!-- USAGE EXAMPLES -->
