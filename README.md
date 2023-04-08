@@ -157,4 +157,5 @@ Project Link: [https://github.com/LondheShubham153/fynd-my-movie](https://github
 [product-screenshot]: images/search.png
 
 
-image.png
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/110477025/230706710-75f210cd-817d-48f8-b8b9-09d62a37bae2.png">
+
